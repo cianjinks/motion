@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuPlus"
+        android:contentDescription="@string/app_bar_plus_content_desc"
+        android:icon="@drawable/ic_plus_48"
+        android:title="@string/app_bar_plus_title"
+        app:showAsAction="ifRoom" />
+</menu>

@@ -4,7 +4,8 @@
     <string name="app_bar_plus_content_desc">Add a new goal</string>
     <string name="goal_dialog_confirm">Confirm</string>
     <string name="goal_dialog_cancel">Cancel</string>
-    <string name="goal_dialog_title">Add new Goal</string>
+    <string name="goal_dialog_title">Add New Goal</string>
+    <string name="goal_dialog_title_alternate">Edit Goal</string>
     <string name="goal_dialog_goalname_title">Goal Name</string>
     <string name="goal_dialog_goaldesc_title">Goal Description</string>
     <string name="goal_dialog_goalrange_start">Min Daily</string>

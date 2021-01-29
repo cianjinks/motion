@@ -7,28 +7,46 @@ import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import com.cianjinks.motion.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.android.material.textview.MaterialTextView;
 
-public class AddGoalDialog extends DialogFragment {
+public class GoalDialog extends DialogFragment {
 
-    private static String ERROR_MESSAGE = "Invalid Input";
+    private static final String ERROR_MESSAGE = "Invalid Input";
     public interface GoalDialogListener {
-        void onDialogPositiveClick(DialogFragment dialog, Goal goal);
+        void onAddDialogPositiveClick(DialogFragment dialog, Goal goal);
+        void onEditDialogPositiveClick(DialogFragment dialog);
         void onDialogNegativeClick(DialogFragment dialog);
     }
+
     protected GoalDialogListener listener;
     protected View mView;
+
+    private final Goal mGoal;
+
+    // Text Fields
+    private TextInputEditText cGoalName;
+    private TextInputEditText cGoalDesc;
+    private TextInputEditText cGoalRangeStart;
+    private TextInputEditText cGoalRangeEnd;
+
+    // Text Field Layouts
+    private TextInputLayout cGoalNameLayout;
+    private TextInputLayout cGoalDescLayout;
+    private TextInputLayout cGoalRangeStartLayout;
+    private TextInputLayout cGoalRangeEndLayout;
+
+    public GoalDialog(Goal goal)
+    {
+        this.mGoal = goal;
+    }
 
     @NonNull
     @Override
@@ -38,8 +56,25 @@ public class AddGoalDialog extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         mView = inflater.inflate(R.layout.add_goal_dialog, null);
 
+        cGoalNameLayout = mView.findViewById(R.id.goalNameLayout);
+        cGoalName = mView.findViewById(R.id.cGoalName);
+        cGoalDescLayout = mView.findViewById(R.id.goalDescLayout);
+        cGoalDesc = mView.findViewById(R.id.cGoalDesc);
+        cGoalRangeStartLayout = mView.findViewById(R.id.goalRangeStartLayout);
+        cGoalRangeStart = mView.findViewById(R.id.cGoalRangeStart);
+        cGoalRangeEndLayout = mView.findViewById(R.id.goalRangeEndLayout);
+        cGoalRangeEnd = mView.findViewById(R.id.cGoalRangeEnd);
+
         builder.setView(mView);
-        builder.setTitle(R.string.goal_dialog_title);
+        if(mGoal != null)
+        {
+            cGoalName.setText(mGoal.goalName);
+            cGoalDesc.setText(mGoal.goalDesc);
+            cGoalRangeStart.setText(String.valueOf(mGoal.completionRangeStart));
+            cGoalRangeEnd.setText(String.valueOf(mGoal.completionRangeEnd));
+            builder.setTitle(R.string.goal_dialog_title_alternate);
+        }
+        else { builder.setTitle(R.string.goal_dialog_title); }
         builder.setPositiveButton(R.string.goal_dialog_confirm, (dialog, which) -> {
             // This is now left empty as we override it later on to control whether or not to close the dialog
 //            TextInputEditText cGoalName = mView.findViewById(R.id.cGoalName);
@@ -73,7 +108,7 @@ public class AddGoalDialog extends DialogFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         // Verify that the host activity implements the callback interface
         try {
@@ -93,18 +128,10 @@ public class AddGoalDialog extends DialogFragment {
         {
             Button confirmButton = dialog.getButton(Dialog.BUTTON_POSITIVE);
             confirmButton.setOnClickListener(v -> {
-                TextInputLayout cGoalNameLayout = mView.findViewById(R.id.goalNameLayout);
                 cGoalNameLayout.setErrorEnabled(false);
-                TextInputEditText cGoalName = mView.findViewById(R.id.cGoalName);
-                TextInputLayout cGoalDescLayout = mView.findViewById(R.id.goalDescLayout);
                 cGoalDescLayout.setErrorEnabled(false);
-                TextInputEditText cGoalDesc = mView.findViewById(R.id.cGoalDesc);
-                TextInputLayout cGoalRangeStartLayout = mView.findViewById(R.id.goalRangeStartLayout);
                 cGoalRangeStartLayout.setErrorEnabled(false);
-                TextInputEditText cGoalRangeStart = mView.findViewById(R.id.cGoalRangeStart);
-                TextInputLayout cGoalRangeEndLayout = mView.findViewById(R.id.goalRangeEndLayout);
                 cGoalRangeEndLayout.setErrorEnabled(false);
-                TextInputEditText cGoalRangeEnd = mView.findViewById(R.id.cGoalRangeEnd);
                 boolean isError = false;
                 if(cGoalName.getText().toString().length() == 0)
                 {
@@ -131,13 +158,22 @@ public class AddGoalDialog extends DialogFragment {
                     isError = true;
                 }
                 if(!isError) {
-                    Goal goal = new Goal(
-                            cGoalName.getText().toString(),
-                            cGoalDesc.getText().toString(),
-                            Integer.parseInt(cGoalRangeStart.getText().toString()),
-                            Integer.parseInt(cGoalRangeEnd.getText().toString())
-                    );
-                    listener.onDialogPositiveClick(df, goal);
+                    if(mGoal == null) {
+                        Goal goal = new Goal(
+                                cGoalName.getText().toString(),
+                                cGoalDesc.getText().toString(),
+                                Integer.parseInt(cGoalRangeStart.getText().toString()),
+                                Integer.parseInt(cGoalRangeEnd.getText().toString())
+                        );
+                        listener.onAddDialogPositiveClick(df, goal);
+                    }
+                    else {
+                        mGoal.goalName = cGoalName.getText().toString();
+                        mGoal.goalDesc = cGoalDesc.getText().toString();
+                        mGoal.completionRangeStart = Integer.parseInt(cGoalRangeStart.getText().toString());
+                        mGoal.completionRangeEnd = Integer.parseInt(cGoalRangeEnd.getText().toString());
+                        listener.onEditDialogPositiveClick(df);
+                    }
                     dialog.dismiss();
                 }
             });

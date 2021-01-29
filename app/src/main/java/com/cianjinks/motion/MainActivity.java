@@ -9,10 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.MenuItem;
 
-import com.cianjinks.motion.Goal.AddGoalDialog;
+import com.cianjinks.motion.Goal.GoalDialog;
 import com.cianjinks.motion.Goal.Goal;
 import com.cianjinks.motion.Util.GoalViewAdapter;
 import com.cianjinks.motion.Util.LocalDateAdapter;
@@ -26,7 +25,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AddGoalDialog.GoalDialogListener, GoalViewAdapter.GoalRecyclerViewListener {
+public class MainActivity extends AppCompatActivity implements GoalDialog.GoalDialogListener, GoalViewAdapter.GoalRecyclerViewListener {
 
     public static String GOAL_DATA_FILE = "goaldata.json";
     public static String GOAL_INTENT = "com.cianjinks.motion.GOAL";
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements AddGoalDialog.Goa
             public boolean onMenuItemClick(MenuItem item) {
                 if(item.getItemId() == R.id.menuPlus)
                 {
-                    DialogFragment frag = new AddGoalDialog();
+                    DialogFragment frag = new GoalDialog(null);
                     frag.show(getSupportFragmentManager(), "addgoalfragment");
                     return true;
                 }
@@ -85,12 +84,18 @@ public class MainActivity extends AppCompatActivity implements AddGoalDialog.Goa
     }
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog, Goal goal) {
+    public void onAddDialogPositiveClick(DialogFragment dialog, Goal goal) {
         goals.add(goal);
         writeGoals();
         //mAdapter.notifyDataSetChanged();
         mAdapter.notifyItemInserted(goals.size() - 1);
         mAdapter.notifyItemRangeChanged(goals.size() - 1, goals.size());
+    }
+
+    @Override
+    public void onEditDialogPositiveClick(DialogFragment dialog) {
+        writeGoals();
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -116,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements AddGoalDialog.Goa
 
     @Override
     public void onEditButtonClick(int pos) {
-        DialogFragment frag = new AddGoalDialog();
+        DialogFragment frag = new GoalDialog(goals.get(pos));
         frag.show(getSupportFragmentManager(), "addgoalfragment");
     }
 

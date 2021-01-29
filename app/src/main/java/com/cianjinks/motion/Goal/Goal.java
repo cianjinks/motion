@@ -8,12 +8,13 @@ import com.google.gson.GsonBuilder;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class Goal {
+public class Goal implements Serializable {
 
     public String goalName;
     public String goalDesc;

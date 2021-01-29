@@ -29,6 +29,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements AddGoalDialog.GoalDialogListener, GoalViewAdapter.GoalRecyclerViewListener {
 
     public static String GOAL_DATA_FILE = "goaldata.json";
+    public static String GOAL_INTENT = "com.cianjinks.motion.GOAL";
     protected RecyclerView mRecyclerView;
     protected MaterialToolbar mAppBar;
     protected ArrayList<Goal> goals;
@@ -86,10 +87,10 @@ public class MainActivity extends AppCompatActivity implements AddGoalDialog.Goa
     @Override
     public void onDialogPositiveClick(DialogFragment dialog, Goal goal) {
         goals.add(goal);
-        try {
-            Goal.writeGoalsToInternalStorage(this.openFileOutput(GOAL_DATA_FILE, Context.MODE_PRIVATE), goals);
-        } catch (FileNotFoundException e) {}
-        mAdapter.notifyDataSetChanged();
+        writeGoals();
+        //mAdapter.notifyDataSetChanged();
+        mAdapter.notifyItemInserted(goals.size() - 1);
+        mAdapter.notifyItemRangeChanged(goals.size() - 1, goals.size());
     }
 
     @Override
@@ -100,8 +101,29 @@ public class MainActivity extends AppCompatActivity implements AddGoalDialog.Goa
     @Override
     public void onRecyclerViewClick(int pos) {
         Intent intent = new Intent(this, GoalActivity.class);
-        String message = goals.get(pos).goalName;
-        intent.putExtra("com.cjink.initialapp.GOALNAME", message);
+        intent.putExtra(GOAL_INTENT, goals.get(pos));
         startActivity(intent);
+    }
+
+    @Override
+    public void onBinButtonClick(int pos) {
+        // Bring up a dialog asking for confirmation of deletion first
+        goals.remove(pos);
+        mAdapter.notifyItemRemoved(pos);
+        mAdapter.notifyItemRangeChanged(pos, goals.size());
+        writeGoals();
+    }
+
+    @Override
+    public void onEditButtonClick(int pos) {
+        DialogFragment frag = new AddGoalDialog();
+        frag.show(getSupportFragmentManager(), "addgoalfragment");
+    }
+
+    private void writeGoals()
+    {
+        try {
+            Goal.writeGoalsToInternalStorage(this.openFileOutput(GOAL_DATA_FILE, Context.MODE_PRIVATE), goals);
+        } catch (FileNotFoundException e) {}
     }
 }

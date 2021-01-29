@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="125dp"
     android:layout_marginLeft="32dp"
     android:layout_marginRight="32dp"
     android:gravity="center_vertical">
@@ -42,14 +42,38 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="20dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
             app:layout_constraintBottom_toBottomOf="@+id/cBackgroundRoundSquare"
             app:layout_constraintEnd_toEndOf="@+id/cBackgroundRoundSquare"
             app:layout_constraintStart_toStartOf="@+id/cBackgroundRoundSquare"
             app:layout_constraintTop_toBottomOf="@+id/cGoalEntryName" />
+
+        <ImageButton
+            android:id="@+id/cBinButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/round_icon_ripple"
+            android:backgroundTint="?attr/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_bin_24" />
+
+        <ImageButton
+            android:id="@+id/cEditButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/round_icon_ripple"
+            android:backgroundTint="?attr/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cBinButton"
+            app:srcCompat="@drawable/ic_edit_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

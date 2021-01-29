@@ -157,21 +157,32 @@ public class GoalDialog extends DialogFragment {
                     cGoalRangeEndLayout.setError(ERROR_MESSAGE);
                     isError = true;
                 }
+                int goalMin = Integer.parseInt(cGoalRangeStart.getText().toString());
+                int goalMax = Integer.parseInt(cGoalRangeEnd.getText().toString());
+                if(goalMin >= goalMax)
+                {
+                    isError = true;
+                    cGoalRangeStartLayout.setErrorEnabled(true);
+                    cGoalRangeStartLayout.setError(ERROR_MESSAGE);
+                    cGoalRangeEndLayout.setErrorEnabled(true);
+                    cGoalRangeEndLayout.setError(ERROR_MESSAGE);
+                }
                 if(!isError) {
                     if(mGoal == null) {
                         Goal goal = new Goal(
                                 cGoalName.getText().toString(),
                                 cGoalDesc.getText().toString(),
-                                Integer.parseInt(cGoalRangeStart.getText().toString()),
-                                Integer.parseInt(cGoalRangeEnd.getText().toString())
+                                goalMin,
+                                goalMax
+
                         );
                         listener.onAddDialogPositiveClick(df, goal);
                     }
                     else {
                         mGoal.goalName = cGoalName.getText().toString();
                         mGoal.goalDesc = cGoalDesc.getText().toString();
-                        mGoal.completionRangeStart = Integer.parseInt(cGoalRangeStart.getText().toString());
-                        mGoal.completionRangeEnd = Integer.parseInt(cGoalRangeEnd.getText().toString());
+                        mGoal.completionRangeStart = goalMin;
+                        mGoal.completionRangeEnd = goalMax;
                         listener.onEditDialogPositiveClick(df);
                     }
                     dialog.dismiss();

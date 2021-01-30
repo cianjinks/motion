@@ -2,6 +2,8 @@
     <string name="app_name">Motion</string>
     <string name="app_bar_plus_title">plus</string>
     <string name="app_bar_plus_content_desc">Add a new goal</string>
+    <string name="app_bar_back_content_desc">Go back to your list of goals</string>
+    <string name="app_bar_back_title">back</string>
     <string name="goal_dialog_confirm">Confirm</string>
     <string name="goal_dialog_cancel">Cancel</string>
     <string name="goal_dialog_title">Add New Goal</string>

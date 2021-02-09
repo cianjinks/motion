@@ -29,8 +29,5 @@ public class GoalActivity extends AppCompatActivity {
         mGoalAppBar = findViewById(R.id.cGoalAppBar);
         mGoalAppBar.setTitle(goal.goalName);
         mGoalAppBar.setNavigationOnClickListener(v -> finish());
-
-        LocalDate testDate = LocalDate.parse("2021-01-01");
-        testDate.getMonth().toString();
     }
 }

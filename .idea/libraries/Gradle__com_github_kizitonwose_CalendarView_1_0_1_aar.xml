@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.kizitonwose:CalendarView:1.0.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4c0cc3c2ff0d2951bd3f2d0efa0ee53/jetified-CalendarView-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4c0cc3c2ff0d2951bd3f2d0efa0ee53/jetified-CalendarView-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c4c0cc3c2ff0d2951bd3f2d0efa0ee53/jetified-CalendarView-1.0.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.kizitonwose/CalendarView/1.0.1/b9c7d900205c2303aacc1a78a5e7146809a520bf/CalendarView-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

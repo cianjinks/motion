@@ -52,7 +52,7 @@ public class GoalViewAdapter extends RecyclerView.Adapter<GoalViewAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            mOnClickListener.onRecyclerViewClick(getAdapterPosition());
+            mOnClickListener.onRecyclerViewClick(getBindingAdapterPosition());
         }
 
         public TextView getGoalEntryName() { return cGoalEntryName; }

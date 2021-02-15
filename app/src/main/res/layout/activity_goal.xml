@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -34,4 +33,44 @@
             app:navigationIcon="@drawable/ic_backarrow_24" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/goalChart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/goalCalendarLinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goalAppBarLayout" />
+
+    <LinearLayout
+        android:id="@+id/goalCalendarLinearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goalChart">
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <com.kizitonwose.calendarview.CalendarView
+            android:id="@+id/goalCalendar"
+            android:layout_width="384dp"
+            android:layout_height="170dp"
+            app:cv_dayViewResource="@layout/calendar_day_layout"
+            app:cv_monthHeaderResource="@layout/calendar_header_layout"
+            app:cv_orientation="horizontal"
+            app:cv_outDateStyle="endOfGrid"
+            app:cv_scrollMode="paged" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

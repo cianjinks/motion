@@ -13,4 +13,12 @@
     <string name="goal_dialog_goalrange_start">Min Daily</string>
     <string name="goal_dialog_goalrange_end">Max Daily</string>
     <string name="goal_recyclerview_background_content_desc">One of your goals</string>
+
+    <string name="goal_calendar_monday">MON</string>
+    <string name="goal_calendar_tuesday">TUE</string>
+    <string name="goal_calendar_wednesday">WED</string>
+    <string name="goal_calendar_thursday">THU</string>
+    <string name="goal_calendar_friday">FRI</string>
+    <string name="goal_calendar_saturday">SAT</string>
+    <string name="goal_calendar_sunday">SUN</string>
 </resources>

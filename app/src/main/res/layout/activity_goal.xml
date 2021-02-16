@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/goalAppBarLayout"
+        android:id="@+id/cGoalAppBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,14 +38,14 @@
         android:id="@+id/goalChart"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/goalCalendarLinearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/cGoalCalendarLinearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/goalAppBarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/cGoalAppBarLayout" />
 
     <LinearLayout
-        android:id="@+id/goalCalendarLinearLayout"
+        android:id="@+id/cGoalCalendarLinearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -57,17 +57,17 @@
 
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/cGoalCalendarMonth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <com.kizitonwose.calendarview.CalendarView
-            android:id="@+id/goalCalendar"
+            android:id="@+id/cGoalCalendar"
             android:layout_width="384dp"
             android:layout_height="170dp"
-            app:cv_dayViewResource="@layout/calendar_day_layout"
-            app:cv_monthHeaderResource="@layout/calendar_header_layout"
+            app:cv_dayViewResource="@layout/activity_calendar_day_layout"
+            app:cv_monthHeaderResource="@layout/activity_calendar_header_layout"
             app:cv_orientation="horizontal"
             app:cv_outDateStyle="endOfGrid"
             app:cv_scrollMode="paged" />
